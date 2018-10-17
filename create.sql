@@ -53,7 +53,7 @@ CREATE TABLE Rezerwacje
                         CONSTRAINT r_fk_id_pokoju REFERENCES Pokoje(id_pokoju),
       
     CONSTRAINT r_ch_data_przyjazdu CHECK(data_przyjazdu > data_rezerwacji),            
-    CONSTRAINT r_ch_data_przyjazdu CHECK(data_wyjazdu > data_przyjazdu)              
+    CONSTRAINT r_ch_data_wyjazdu CHECK(data_wyjazdu > data_przyjazdu)              
 );
 
 CREATE TABLE Wyposazenia
