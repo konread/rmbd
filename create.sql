@@ -22,6 +22,7 @@ CREATE TABLE Pokoje
     id_pokoju NUMBER(3) CONSTRAINT p_pk_id_pokoju PRIMARY KEY,
     numer NUMBER(3) CONSTRAINT p_nn_numer NOT NULL,
     liczba_osob NUMBER(2) CONSTRAINT p_nn_liczba_osob NOT NULL,
+    -- status: wolny (W), zajety (Z)
     status CHAR(1) CONSTRAINT p_nn_status NOT NULL  
                    CONSTRAINT p_ch_status CHECK(status IN ('W', 'Z')),
                    
@@ -35,6 +36,7 @@ CREATE TABLE Ceny_pokoi
     data_ustawienia DATE CONSTRAINT cp_nn_data_ustawienia NOT NULL,
     id_pokoju NUMBER(3) CONSTRAINT cp_nn_id_pokoju NOT NULL
                         CONSTRAINT cp_fk_id_pokoju REFERENCES Pokoje(id_pokoju),
+    -- status: aktualna (A), nieaktualna (N)
     status CHAR(1) CONSTRAINT cp_nn_status NOT NULL  
                    CONSTRAINT cp_ch_status CHECK(status IN ('A', 'N')),
     
@@ -47,6 +49,9 @@ CREATE TABLE Rezerwacje
     data_rezerwacji DATE CONSTRAINT r_nn_data_rezerwacji NOT NULL,
     data_przyjazdu DATE CONSTRAINT r_nn_data_przyjazdu NOT NULL,
     data_wyjazdu DATE CONSTRAINT r_nn_data_wyjazdu NOT NULL,
+    -- status: zaplacono (Z), nie zaplacono (N)
+    status CHAR(1) CONSTRAINT r_nn_status NOT NULL  
+                   CONSTRAINT r_ch_status CHECK(status IN ('Z', 'N')), 
     id_klienta NUMBER(3) CONSTRAINT r_nn_id_klienta NOT NULL
                          CONSTRAINT r_fk_id_klienta REFERENCES Klienci(id_klienta),
     id_pokoju NUMBER(3) CONSTRAINT r_nn_id_pokoju NOT NULL
