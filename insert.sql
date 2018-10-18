@@ -27,13 +27,16 @@ INSERT INTO Pokoje(id_pokoju, numer, liczba_osob, status) VALUES(8, 107, 3, 'W')
 INSERT INTO Pokoje(id_pokoju, numer, liczba_osob, status) VALUES(9, 108, 3, 'W');
 INSERT INTO Pokoje(id_pokoju, numer, liczba_osob, status) VALUES(10, 109, 4, 'W');
 
-INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_ustawienia, id_pokoju, status) VALUES(1, 150.00, '2018-05-10', 1, 'A'); 
-INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_ustawienia, id_pokoju, status) VALUES(2, 150.00, '2018-04-12', 2, 'A');
-INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_ustawienia, id_pokoju, status) VALUES(3, 200.00, '2018-06-08', 3, 'A');
-INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_ustawienia, id_pokoju, status) VALUES(4, 150.00, '2018-01-01', 4, 'A');
-INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_ustawienia, id_pokoju, status) VALUES(5, 150.00, '2018-05-10', 5, 'A');
-INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_ustawienia, id_pokoju, status) VALUES(6, 150.00, '2018-04-22', 6, 'A');
-INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_ustawienia, id_pokoju, status) VALUES(7, 150.00, '2018-03-15', 7, 'A');
-INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_ustawienia, id_pokoju, status) VALUES(8, 150.00, '2018-08-10', 8, 'A');
-INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_ustawienia, id_pokoju, status) VALUES(9, 150.00, '2018-07-17', 9, 'A');
-INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_ustawienia, id_pokoju, status) VALUES(10, 150.00, '2018-02-18', 10, 'A');
+INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_obowiazywania_od, data_obowiazywania_do, id_pokoju, status) VALUES(1, 150.00, '2018-05-10', null, 1, 'A'); 
+INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_obowiazywania_od, data_obowiazywania_do, id_pokoju, status) VALUES(2, 150.00, '2018-04-12', null, 2, 'A');
+INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_obowiazywania_od, data_obowiazywania_do, id_pokoju, status) VALUES(3, 200.00, '2018-06-08', null, 3, 'A');
+INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_obowiazywania_od, data_obowiazywania_do, id_pokoju, status) VALUES(4, 150.00, '2018-01-01', null, 4, 'A');
+INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_obowiazywania_od, data_obowiazywania_do, id_pokoju, status) VALUES(5, 150.00, '2018-05-10', null, 5, 'A');
+INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_obowiazywania_od, data_obowiazywania_do, id_pokoju, status) VALUES(6, 150.00, '2018-04-22', null, 6, 'A');
+INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_obowiazywania_od, data_obowiazywania_do, id_pokoju, status) VALUES(7, 150.00, '2018-03-15', null, 7, 'A');
+INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_obowiazywania_od, data_obowiazywania_do, id_pokoju, status) VALUES(8, 150.00, '2018-08-10', null, 8, 'A');
+INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_obowiazywania_od, data_obowiazywania_do, id_pokoju, status) VALUES(9, 150.00, '2018-07-17', null, 9, 'A');
+INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_obowiazywania_od, data_obowiazywania_do, id_pokoju, status) VALUES(10, 150.00, '2018-02-18', null, 10, 'A');
+
+INSERT INTO Rezerwacje(id_rezerwacji, data_rezerwacji, data_przyjazdu, data_wyjazdu, status, id_klienta, id_pokoju) VALUES(1, '2018-08-12', '2018-08-20', '2018-09-02', 'N', 1, 8);
+INSERT INTO Rezerwacje(id_rezerwacji, data_rezerwacji, data_przyjazdu, data_wyjazdu, status, id_klienta, id_pokoju) VALUES(2, '2018-08-20', '2018-09-10', '2018-09-12', 'N', 1, 8);

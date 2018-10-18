@@ -1,5 +1,3 @@
-SET SERVEROUTPUT ON
-
 /*
     PROCEDURE 1
 */
@@ -47,7 +45,8 @@ IS
                     UPDATE
                         Ceny_pokoi
                     SET 
-                        status = status_n
+                        status = status_n,
+                        data_obowiazywania_do = nowa_data_ustawienia
                     WHERE 
                         id_ceny_pokoju = nowe_id_ceny_pokoju;
             ELSE
@@ -65,9 +64,9 @@ IS
                 Ceny_pokoi;
             
             INSERT INTO 
-                Ceny_pokoi(id_ceny_pokoju, cena, data_ustawienia, id_pokoju, status)
+                Ceny_pokoi(id_ceny_pokoju, cena, data_obowiazywania_od, data_obowiazywania_do, id_pokoju, status)
             VALUES
-                (nowe_id_ceny_pokoju + 1, cena, nowa_data_ustawienia, nowe_id_pokoju, status_a); 
+                (nowe_id_ceny_pokoju + 1, cena, nowa_data_ustawienia, null, nowe_id_pokoju, status_a); 
                 
         CLOSE aktualne_ceny_pokoi;
         
@@ -87,7 +86,9 @@ SELECT
     p.numer,
     cp.id_ceny_pokoju,
     cp.cena,
-    cp.status
+    cp.status,
+    cp.data_obowiazywania_od,
+    cp.data_obowiazywania_do
 FROM 
     Pokoje p INNER JOIN Ceny_pokoi cp ON p.id_pokoju = cp.id_pokoju;
     
@@ -100,12 +101,15 @@ SELECT
     p.numer,
     cp.id_ceny_pokoju,
     cp.cena,
-    cp.status
+    cp.status,
+    cp.data_obowiazywania_od,
+    cp.data_obowiazywania_do
 FROM 
     Pokoje p INNER JOIN Ceny_pokoi cp ON p.id_pokoju = cp.id_pokoju;
     
 -- RUN EXCEPTION -->
 
+SET SERVEROUTPUT ON
 BEGIN
   ustaw_cene_pokoju(120, 620.00);
 END;

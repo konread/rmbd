@@ -33,14 +33,15 @@ CREATE TABLE Ceny_pokoi
 (
     id_ceny_pokoju NUMBER(3) CONSTRAINT cp_pk_id_ceny_pokoju PRIMARY KEY,
     cena NUMBER(6,2) CONSTRAINT cp_nn_cena NOT NULL,
-    data_ustawienia DATE CONSTRAINT cp_nn_data_ustawienia NOT NULL,
+    data_obowiazywania_od DATE CONSTRAINT cp_nn_data_obowiazywania_od NOT NULL,
+    data_obowiazywania_do DATE,
     id_pokoju NUMBER(3) CONSTRAINT cp_nn_id_pokoju NOT NULL
                         CONSTRAINT cp_fk_id_pokoju REFERENCES Pokoje(id_pokoju),
     -- status: aktualna (A), nieaktualna (N)
     status CHAR(1) CONSTRAINT cp_nn_status NOT NULL  
                    CONSTRAINT cp_ch_status CHECK(status IN ('A', 'N')),
     
-    CONSTRAINT cp_u UNIQUE(id_pokoju, data_ustawienia)
+    CONSTRAINT cp_ch_data_obowiazywania CHECK(data_obowiazywania_do >= data_obowiazywania_od)
 );
 
 CREATE TABLE Rezerwacje
