@@ -107,6 +107,8 @@ SELECT
 FROM 
     Pokoje p INNER JOIN Ceny_pokoi cp ON p.id_pokoju = cp.id_pokoju;
     
+ROLLBACK;
+
 -- RUN EXCEPTION -->
 
 SET SERVEROUTPUT ON

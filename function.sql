@@ -14,7 +14,11 @@ AS
             Klienci k 
                 INNER JOIN Rezerwacje r ON k.id_klienta = r.id_klienta 
                 INNER JOIN Ceny_pokoi cp ON r.id_pokoju = cp.id_pokoju AND 
-                                            r.data_rezerwacji BETWEEN cp.data_obowiazywania_od AND cp.data_obowiazywania_do 
+                                            (
+                                                r.data_rezerwacji BETWEEN cp.data_obowiazywania_od AND cp.data_obowiazywania_do OR 
+                                                (cp.data_obowiazywania_do IS NULL AND r.data_rezerwacji >= cp.data_obowiazywania_od)
+                                            )
+                                                 
         WHERE 
             r.status = 'N';
             
