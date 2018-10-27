@@ -40,3 +40,7 @@ INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_obowiazywania_od, data_obowiaz
 
 INSERT INTO Rezerwacje(id_rezerwacji, data_rezerwacji, data_przyjazdu, data_wyjazdu, status, id_klienta, id_pokoju) VALUES(1, '2018-08-12', '2018-08-20', '2018-09-02', 'N', 1, 8);
 INSERT INTO Rezerwacje(id_rezerwacji, data_rezerwacji, data_przyjazdu, data_wyjazdu, status, id_klienta, id_pokoju) VALUES(2, '2018-08-20', '2018-09-10', '2018-09-12', 'N', 1, 8);
+
+INSERT INTO Wyposazenia(id_wyposazenia, nazwa, liczba_szt_calk, liczba_szt_dost) VALUES(1, 'telewizor', 3, 1);
+
+INSERT INTO Wyposazenia_pokoi(id_wyposazenia, id_pokoju) VALUES(1,10);

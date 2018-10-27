@@ -65,7 +65,11 @@ CREATE TABLE Rezerwacje
 CREATE TABLE Wyposazenia
 (
     id_wyposazenia NUMBER(3) CONSTRAINT w_pk_id_wyposazenia PRIMARY KEY,
-    nazwa VARCHAR(50) CONSTRAINT w_nn_nazwa NOT NULL
+    nazwa VARCHAR(50) CONSTRAINT w_nn_nazwa NOT NULL,
+    liczba_szt_calk NUMBER(3) CONSTRAINT w_nn_liczba_szt_calk NOT NULL,
+    liczba_szt_dost NUMBER(3) CONSTRAINT w_nn_liczba_szt_dost NOT NULL, 
+    
+    CONSTRAINT w_ch_liczba_szt_dost CHECK(liczba_szt_dost <= liczba_szt_calk)
 );
 
 CREATE TABLE Wyposazenia_pokoi

@@ -130,4 +130,76 @@ FROM
     TRIGGER 3
 */
 
--- cd.
+CREATE OR REPLACE VIEW 
+    Wyposazenia_pokoi_v 
+AS 
+    SELECT 
+        * 
+    FROM 
+        Wyposazenia_pokoi;
+
+CREATE OR REPLACE TRIGGER 
+    wyposazenie_pokoju
+INSTEAD OF INSERT ON 
+    Wyposazenia_pokoi_v
+FOR EACH ROW
+DECLARE
+    temp_liczba_szt_calk Wyposazenia.liczba_szt_calk % TYPE;
+    temp_liczba_szt_dost Wyposazenia.liczba_szt_dost % TYPE;
+BEGIN
+    SELECT
+        liczba_szt_calk,
+        liczba_szt_dost
+    INTO 
+        temp_liczba_szt_calk,
+        temp_liczba_szt_dost
+    FROM
+        Wyposazenia
+    WHERE
+        id_wyposazenia = :NEW.id_wyposazenia;
+        
+    IF temp_liczba_szt_dost < temp_liczba_szt_calk
+        THEN  
+            temp_liczba_szt_dost := temp_liczba_szt_dost + 1;
+        
+            INSERT INTO 
+                Wyposazenia_pokoi(id_wyposazenia, id_pokoju) 
+            VALUES
+                (:NEW.id_wyposazenia, :NEW.id_pokoju);
+        
+            UPDATE 
+                Wyposazenia
+            SET
+                liczba_szt_dost = temp_liczba_szt_dost
+            WHERE 
+                id_wyposazenia = :NEW.id_wyposazenia;
+    END IF;
+END;
+
+-- TEST -->
+
+SELECT
+    *
+FROM
+    Wyposazenia;
+    
+SELECT
+    *
+FROM
+    Wyposazenia_pokoi;
+
+INSERT INTO Wyposazenia_pokoi_v(id_wyposazenia, id_pokoju) VALUES(1,7);
+
+SELECT
+    *
+FROM
+    Wyposazenia;
+    
+SELECT
+    *
+FROM
+    Wyposazenia_pokoi;
+    
+ROLLBACK;
+
+-- TEST <--
