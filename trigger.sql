@@ -144,23 +144,20 @@ INSTEAD OF INSERT ON
     Wyposazenia_pokoi_v
 FOR EACH ROW
 DECLARE
-    temp_liczba_szt_calk Wyposazenia.liczba_szt_calk % TYPE;
     temp_liczba_szt_dost Wyposazenia.liczba_szt_dost % TYPE;
 BEGIN
     SELECT
-        liczba_szt_calk,
         liczba_szt_dost
     INTO 
-        temp_liczba_szt_calk,
         temp_liczba_szt_dost
     FROM
         Wyposazenia
     WHERE
         id_wyposazenia = :NEW.id_wyposazenia;
         
-    IF temp_liczba_szt_dost < temp_liczba_szt_calk
+    IF temp_liczba_szt_dost > 0
         THEN  
-            temp_liczba_szt_dost := temp_liczba_szt_dost + 1;
+            temp_liczba_szt_dost := temp_liczba_szt_dost - 1;
         
             INSERT INTO 
                 Wyposazenia_pokoi(id_wyposazenia, id_pokoju) 
