@@ -39,8 +39,19 @@ INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_obowiazywania_od, data_obowiaz
 INSERT INTO Ceny_pokoi(id_ceny_pokoju, cena, data_obowiazywania_od, data_obowiazywania_do, id_pokoju, status) VALUES(10, 150.00, '2018-02-18', null, 10, 'A');
 
 INSERT INTO Rezerwacje(id_rezerwacji, data_rezerwacji, data_przyjazdu, data_wyjazdu, status, id_klienta, id_pokoju) VALUES(1, '2018-08-12', '2018-08-20', '2018-09-02', 'N', 1, 8);
-INSERT INTO Rezerwacje(id_rezerwacji, data_rezerwacji, data_przyjazdu, data_wyjazdu, status, id_klienta, id_pokoju) VALUES(2, '2018-08-20', '2018-09-10', '2018-09-12', 'N', 1, 8);
+INSERT INTO Rezerwacje(id_rezerwacji, data_rezerwacji, data_przyjazdu, data_wyjazdu, status, id_klienta, id_pokoju) VALUES(2, '2018-08-20', '2018-09-10', '2018-09-24', 'N', 4, 6);
+INSERT INTO Rezerwacje(id_rezerwacji, data_rezerwacji, data_przyjazdu, data_wyjazdu, status, id_klienta, id_pokoju) VALUES(3, '2018-08-22', '2018-09-11', '2018-09-28', 'N', 5, 5);
+INSERT INTO Rezerwacje(id_rezerwacji, data_rezerwacji, data_przyjazdu, data_wyjazdu, status, id_klienta, id_pokoju) VALUES(4, '2018-08-23', '2018-09-09', '2018-09-22', 'N', 9, 1);
+INSERT INTO Rezerwacje(id_rezerwacji, data_rezerwacji, data_przyjazdu, data_wyjazdu, status, id_klienta, id_pokoju) VALUES(5, '2018-09-02', '2018-09-12', '2018-09-22', 'N', 6, 10);
 
-INSERT INTO Wyposazenia(id_wyposazenia, nazwa, liczba_szt_calk, liczba_szt_dost) VALUES(1, 'telewizor', 3, 1);
+INSERT INTO Wyposazenia(id_wyposazenia, nazwa, liczba_szt_calk, liczba_szt_dost) VALUES(1, 'telewizor', 3, 2);
+INSERT INTO Wyposazenia(id_wyposazenia, nazwa, liczba_szt_calk, liczba_szt_dost) VALUES(2, 'parking', 10, 3);
 
 INSERT INTO Wyposazenia_pokoi(id_wyposazenia, id_pokoju) VALUES(1,10);
+INSERT INTO Wyposazenia_pokoi(id_wyposazenia, id_pokoju) VALUES(2,10);
+INSERT INTO Wyposazenia_pokoi(id_wyposazenia, id_pokoju) VALUES(2,9);
+INSERT INTO Wyposazenia_pokoi(id_wyposazenia, id_pokoju) VALUES(2,8);
+INSERT INTO Wyposazenia_pokoi(id_wyposazenia, id_pokoju) VALUES(2,7);
+INSERT INTO Wyposazenia_pokoi(id_wyposazenia, id_pokoju) VALUES(2,6);
+INSERT INTO Wyposazenia_pokoi(id_wyposazenia, id_pokoju) VALUES(2,5);
+INSERT INTO Wyposazenia_pokoi(id_wyposazenia, id_pokoju) VALUES(2,4);

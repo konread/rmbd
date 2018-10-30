@@ -57,4 +57,68 @@ FROM
     FUNCTION 2
 */
 
--- cd.
+CREATE OR REPLACE FUNCTION ilosc_wolnych_msc_parkingowych(zadana_data Rezerwacje.data_przyjazdu % TYPE)
+RETURN NUMBER
+AS
+    CURSOR miejsca_parkingowe
+    IS
+        SELECT 
+            wp.id_pokoju AS numer_pokoju,
+            r.data_przyjazdu AS data_przybycia,
+            r.data_wyjazdu AS data_odjazdu
+        FROM Wyposazenia_pokoi wp
+            LEFT JOIN Rezerwacje r on wp.id_pokoju = r.id_pokoju
+        WHERE
+            wp.id_wyposazenia = (SELECT w.id_wyposazenia FROM Wyposazenia w WHERE w.nazwa = 'parking');
+
+    mp miejsca_parkingowe % ROWTYPE;  
+    liczba_wolnych_miejsc number := 0;
+    
+    BEGIN
+        OPEN miejsca_parkingowe;
+        LOOP 
+            FETCH miejsca_parkingowe INTO mp;
+            EXIT WHEN miejsca_parkingowe % NOTFOUND;
+            
+            IF mp.data_przybycia IS NULL
+                THEN
+                    liczba_wolnych_miejsc := liczba_wolnych_miejsc + 1;
+            ELSIF zadana_data < mp.data_przybycia
+                THEN
+                    liczba_wolnych_miejsc := liczba_wolnych_miejsc + 1;
+            ELSIF zadana_data > mp.data_odjazdu
+                THEN
+                    liczba_wolnych_miejsc := liczba_wolnych_miejsc + 1;
+            END IF;
+        END LOOP;
+        CLOSE miejsca_parkingowe;
+    
+    return liczba_wolnych_miejsc;
+END;
+
+-- TEST <--
+
+SET SERVEROUTPUT ON
+DECLARE 
+   rezultat number := 0;
+   zadana_data date := '2018-09-14';
+BEGIN 
+   rezultat := ilosc_wolnych_msc_parkingowych(zadana_data); 
+   dbms_output.put_line('Liczba wolnych miejsc parkingowych w dniu ' || TO_CHAR(zadana_data) || ' wynosila: ' || rezultat); 
+END;
+
+DECLARE 
+   rezultat number := 0;
+   zadana_data date := '2018-07-15';
+BEGIN 
+   rezultat := ilosc_wolnych_msc_parkingowych(zadana_data); 
+   dbms_output.put_line('Liczba wolnych miejsc parkingowych w dniu ' || TO_CHAR(zadana_data) || ' wynosila: ' || rezultat); 
+END; 
+
+ROLLBACK;
+
+-- TEST <--
+
+/*
+    FUNCTION 3
+*/
