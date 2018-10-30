@@ -43,6 +43,7 @@ INSERT INTO Rezerwacje(id_rezerwacji, data_rezerwacji, data_przyjazdu, data_wyja
 INSERT INTO Rezerwacje(id_rezerwacji, data_rezerwacji, data_przyjazdu, data_wyjazdu, status, id_klienta, id_pokoju) VALUES(3, '2018-08-22', '2018-09-11', '2018-09-28', 'N', 5, 5);
 INSERT INTO Rezerwacje(id_rezerwacji, data_rezerwacji, data_przyjazdu, data_wyjazdu, status, id_klienta, id_pokoju) VALUES(4, '2018-08-23', '2018-09-09', '2018-09-22', 'N', 9, 1);
 INSERT INTO Rezerwacje(id_rezerwacji, data_rezerwacji, data_przyjazdu, data_wyjazdu, status, id_klienta, id_pokoju) VALUES(5, '2018-09-02', '2018-09-12', '2018-09-22', 'N', 6, 10);
+INSERT INTO Rezerwacje(id_rezerwacji, data_rezerwacji, data_przyjazdu, data_wyjazdu, status, id_klienta, id_pokoju) VALUES(6, '2018-10-02', '2018-10-12', '2018-10-22', 'N', 5, 5);
 
 INSERT INTO Wyposazenia(id_wyposazenia, nazwa, liczba_szt_calk, liczba_szt_dost) VALUES(1, 'telewizor', 3, 2);
 INSERT INTO Wyposazenia(id_wyposazenia, nazwa, liczba_szt_calk, liczba_szt_dost) VALUES(2, 'parking', 10, 3);

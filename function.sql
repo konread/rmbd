@@ -122,3 +122,79 @@ ROLLBACK;
 /*
     FUNCTION 3
 */
+
+CREATE OR REPLACE FUNCTION zysk_z_pokoju(
+                            numer_pokoju Pokoje.numer % TYPE, 
+                            data_od Rezerwacje.data_przyjazdu % TYPE,
+                            data_do Rezerwacje.data_wyjazdu % TYPE)
+RETURN NUMBER
+AS
+    CURSOR rezerwacje_pokoju
+    IS
+        SELECT 
+            r.data_przyjazdu AS data_przybycia,
+            r.data_wyjazdu AS data_odjazdu,
+            cp.cena AS cena_pokoju
+        FROM Rezerwacje r
+            INNER JOIN Ceny_pokoi cp on r.id_pokoju = cp.id_pokoju
+        WHERE
+            r.id_pokoju = (SELECT p.id_pokoju FROM Pokoje p WHERE p.numer = numer_pokoju);
+    
+    zysk number := 0;
+    start_date number := 0;
+    end_date number := 0;
+    business_date varchar2(10);
+    rp rezerwacje_pokoju % ROWTYPE;
+    
+    BEGIN
+        OPEN rezerwacje_pokoju;
+        
+        start_date := to_number(to_char(data_od, 'j'));
+        end_date := to_number(to_char(data_do, 'j'));
+        
+        LOOP 
+            FETCH rezerwacje_pokoju INTO rp;
+            EXIT WHEN rezerwacje_pokoju % NOTFOUND;
+            
+            FOR cur_r IN start_date..end_date LOOP
+                business_date := to_char(to_date(cur_r, 'j'), 'yyyy-MM-dd');
+                IF business_date >= rp.data_przybycia AND business_date <= rp.data_odjazdu
+                    THEN
+                        zysk := zysk + rp.cena_pokoju;
+                END IF;
+            END LOOP;
+            
+        END LOOP;
+        
+        CLOSE rezerwacje_pokoju;
+        
+    return zysk;
+END;
+
+-- TEST <--
+
+SET SERVEROUTPUT ON
+
+DECLARE 
+   rezultat number := 0;
+   nr_pokoju number := 104;
+   od date := '2018-09-01';
+   do date := '2018-11-01';
+BEGIN 
+    rezultat := zysk_z_pokoju(nr_pokoju, od, do);
+    dbms_output.put_line('Pokoj nr ' || TO_CHAR(nr_pokoju) || ' zarobil: ' || rezultat);
+END; 
+
+DECLARE 
+   rezultat number := 0;
+   nr_pokoju number := 107;
+   od date := '2018-09-01';
+   do date := '2018-09-20';
+BEGIN 
+    rezultat := zysk_z_pokoju(nr_pokoju, od, do);
+    dbms_output.put_line('Pokoj nr ' || TO_CHAR(nr_pokoju) || ' zarobil: ' || rezultat);
+END; 
+
+ROLLBACK;
+
+-- TEST <--
