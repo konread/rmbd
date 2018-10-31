@@ -136,10 +136,14 @@ AS
             r.data_wyjazdu AS data_odjazdu,
             cp.cena AS cena_pokoju
         FROM Rezerwacje r
-            INNER JOIN Ceny_pokoi cp on r.id_pokoju = cp.id_pokoju
+            INNER JOIN Ceny_pokoi cp on r.id_pokoju = cp.id_pokoju AND 
+                                            (
+                                                r.data_rezerwacji BETWEEN cp.data_obowiazywania_od AND cp.data_obowiazywania_do OR 
+                                                (cp.data_obowiazywania_do IS NULL AND r.data_rezerwacji >= cp.data_obowiazywania_od)
+                                            )
         WHERE
             r.id_pokoju = (SELECT p.id_pokoju FROM Pokoje p WHERE p.numer = numer_pokoju);
-    
+            
     zysk number := 0;
     start_date number := 0;
     end_date number := 0;
