@@ -162,7 +162,7 @@ AS
             
             FOR cur_r IN start_date..end_date LOOP
                 business_date := to_char(to_date(cur_r, 'j'), 'yyyy-MM-dd');
-                IF business_date >= rp.data_przybycia AND business_date <= rp.data_odjazdu
+                IF business_date > rp.data_przybycia AND business_date <= rp.data_odjazdu
                     THEN
                         zysk := zysk + rp.cena_pokoju;
                 END IF;
